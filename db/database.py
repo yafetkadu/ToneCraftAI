@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 
 #loading .env
-load_dotenv('../.env')
+load_dotenv('.env')
 
 
 #Initizlers
