@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ToneCraft AI – Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* Basic Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(135deg, #f9d8ff, #c7e8ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* full height of window */
+    padding: 20px;
+  }
+
+  .container {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    transition: all 0.3s ease;
+  }
+
+  .container img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    margin: 0 0 20px;
+    color: #444;
+  }
+
+  .login-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+  }
+
+  /* Email login button gradient */
+  #emailLogin {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+  }
+  #emailLogin:hover {
+    background: linear-gradient(90deg, #5a67d8, #6b439f);
+    transform: translateY(-2px);
+  }
+
+  /* Google login button gradient */
+  .google-btn {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  }
+  .google-btn:hover {
+    background: linear-gradient(90deg, #f1623f, #fca65f);
+    transform: translateY(-2px);
+  }
+
+  .footer {
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 16px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 400px) {
+    .container {
+      padding: 20px 15px;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <img width="50" src="assets/favicon-512x512.png" alt="ToneCraft Logo" />
+  <h1>Welcome to ToneCraft AI</h1>
+
+  <div class="login-options">
+    <button id="emailLogin">Login with Email</button>
+    <button class="google-btn" id="googleLoginBtn">Login with Google</button>
+  </div>
+
+  <div class="footer">v2.1 · Powered by AI</div>
+</div>
+<script type="module" src="firebase-init.js"></script>
+<script type="module" src="auth.js"></script>
+
+
+</body>
+</html>

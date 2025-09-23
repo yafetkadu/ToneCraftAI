@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ToneCraft – Login</title>
+  <title>ToneCraft – Register</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
   <style>
     * { box-sizing: border-box; }
 
@@ -44,6 +43,7 @@
       color: #444;
     }
 
+    input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 80%;
@@ -111,7 +111,7 @@
         font-size: 1.1rem;
       }
 
-      input[type="email"], input[type="password"], button {
+      input[type="text"], input[type="email"], input[type="password"], button {
         width: 100%;
       }
     }
@@ -119,64 +119,56 @@
 </head>
 <body>
   <div class="container">
-   <img width="50" src="assets/favicon-512x512.png" alt="ToneCraft Logo" />
-    <h1>Login to ToneCraft</h1>
-    <div id="loginForm">
+    <img width="50" src="assets/favicon-512x512.png" alt="ToneCraft Logo" />
+    <h1>Create an Account</h1>
+    <div id="registerForm">
+      <input type="text" id="firstname" placeholder="firstname" required />
+      <input type="text" id="lastname" placeholder="lastname" required />
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
-      <button id="loginWithEmail">Login</button>
+      <button id="registerBtn">Register</button>
     </div>
 
     <hr />
     <div class="links">
-      <a href="register.html">Register</a>
+      <a href="index.html">Back to Login</a>
       <a href="#">Forgot Password?</a>
     </div>
 
-    <div class="note">Your info stays private on this device.</div>
+    <div class="note">We never share your info. Stay safe!</div>
   </div>
 
   <script>
-    const BACKEND_URL_API = 'http://127.0.0.1:8000/auth/login';
 
-    document.getElementById('loginWithEmail').addEventListener('click', () => {
-        var email = $("#email").val();
-        var password = $("#password").val();
-
-        let loginCred = {
-            "email": email,
-            "password": password,
-        }
-        console.log(loginCred);
-
-        $.ajax({
-            url: BACKEND_URL_API,
-            type: "POST",
-            contentType: "application/json; charset=UTF-8",
-            dataType: "json",
-            data: JSON.stringify(loginCred),
-            success: function(data) {
-    console.log("Login successful:", data);
-    chrome.storage.local.set({authToken: data.access_token});
-    alert("Login successful!");
-    
-    // Use Chrome API to close the window
-    if (chrome && chrome.tabs) {
-        chrome.tabs.getCurrent(function(tab) {
-            chrome.tabs.remove(tab.id);
-        });
-    } else {
-        window.close(); // Fallback
-    }
-},
-            error: (xhr) => {
-                console.error("Error", xhr.status, xhr.responseText);
-                alert(`Error ${xhr.status}: ${xhr.responseText}`);
-            }
-        });
+    const BACKEND_URL_API = 'http://127.0.0.1:8000/auth/signup'
+    // Optional: handle register button
+    document.getElementById('registerBtn').addEventListener('click', () => {
+      alert('Registering...');
+      registerWithEmail()
     });
 
-    console.log("Login page loaded");
-</script>
+    function registerWithEmail() {
+        let register_info = {
+            firstname: $('#firstname').val(),
+            lastname: $("#lastname").val(),
+            email: $('#email').val(),
+            password: $('#password').val(),
+        }
+        $.ajax({
+            url: BACKEND_URL_API,
+            method: 'POST',
+            contentType: "application/json", 
+            data: JSON.stringify(register_info), 
+            success: loggedIn
+        })
+    }
+
+    function loggedIn(data) {
+        alert("LOGGED IN YAYAYAYAYA")
+        console.log(data)
+    }
+
+
+  </script>
 </body>
 </html>

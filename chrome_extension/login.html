@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ToneCraft – Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
 
   <style>
     * { box-sizing: border-box; }
@@ -136,47 +136,6 @@
     <div class="note">Your info stays private on this device.</div>
   </div>
 
-  <script>
-    const BACKEND_URL_API = 'http://127.0.0.1:8000/auth/login';
-
-    document.getElementById('loginWithEmail').addEventListener('click', () => {
-        var email = $("#email").val();
-        var password = $("#password").val();
-
-        let loginCred = {
-            "email": email,
-            "password": password,
-        }
-        console.log(loginCred);
-
-        $.ajax({
-            url: BACKEND_URL_API,
-            type: "POST",
-            contentType: "application/json; charset=UTF-8",
-            dataType: "json",
-            data: JSON.stringify(loginCred),
-            success: function(data) {
-    console.log("Login successful:", data);
-    chrome.storage.local.set({authToken: data.access_token});
-    alert("Login successful!");
-    
-    // Use Chrome API to close the window
-    if (chrome && chrome.tabs) {
-        chrome.tabs.getCurrent(function(tab) {
-            chrome.tabs.remove(tab.id);
-        });
-    } else {
-        window.close(); // Fallback
-    }
-},
-            error: (xhr) => {
-                console.error("Error", xhr.status, xhr.responseText);
-                alert(`Error ${xhr.status}: ${xhr.responseText}`);
-            }
-        });
-    });
-
-    console.log("Login page loaded");
-</script>
+  <script src="login.js"></script>
 </body>
 </html>
