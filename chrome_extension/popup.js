@@ -219,7 +219,7 @@ Warmly,
   }
 
 async function generate_ai_email(draft, tone) {
-    const BACKEND_URL_API = 'http://127.0.0.1:8000/generate';
+    const BACKEND_URL_API = 'https://tonecraftai.onrender.com/generate';
 
     const prompt = {
         draft: draft,

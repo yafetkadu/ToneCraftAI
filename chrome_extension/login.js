@@ -1,4 +1,4 @@
-const BACKEND_URL_API = 'http://127.0.0.1:8000/auth/login';
+const BACKEND_URL_API = 'https://tonecraftai.onrender.com/auth/login';
 
 document.getElementById('loginWithEmail').addEventListener('click', () => {
     var email = document.getElementById("email").value;

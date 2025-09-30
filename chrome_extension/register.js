@@ -1,4 +1,4 @@
-const BACKEND_URL_API = 'http://127.0.0.1:8000/auth/signup';
+const BACKEND_URL_API = 'https://tonecraftai.onrender.com/auth/signup';
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Register page loaded");
