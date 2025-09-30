@@ -46,17 +46,156 @@
         .hidden {
             display: none;
         }
+        
+        /* New styles for the toggle switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #03172a;
+            border-radius: 5px;
+        }
+        .toggle-label {
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #007bff;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
     </style>
+    <link rel="stylesheet" href="popup.css">
 </head>
 <body>
     <h3 style="text-align: center; margin-bottom: 15px;">My App</h3>
-    
-    <button id="login-btn" class="btn login-btn">Login</button>
-    <button id="register-btn" class="btn register-btn">Register</button>
-    <button id="logout-btn" class="btn logout-btn hidden">Logout</button>
+
+    <div id="auth-container" class="auth-container">
+        <h1>I HATE YOU</h1>
+        <button id="login-btn" class="btn login-btn">Login</button>
+        <button id="register-btn" class="btn register-btn">Register</button>
+    </div>
+
+    <div id="app-container" class="app-container">
+        <!--<h1>JK. I LOVE YOU</h1>-->
+
+        <div class="container">
+            <div class="header">
+                <div class="mode-toggle" id="modeToggle">
+                    <div class="toggle-knob"></div>
+                </div>
+                <h1>AI Email Assistant</h1>
+                <div class="history-btn" id="historyBtn">History</div>
+            </div>
+
+            <!-- Tone Tokens Toggle -->
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toneTokensToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label">Use Tone Tokens</span>
+
+                <h3>Tokens:  <span id="token-status">0</span></h3>
+            </div>
+
+            <div class="input-group">
+                <textarea id="emailInput" placeholder="Describe what you want to write about..."></textarea>
+                <select id="toneSelect">
+                    <option value="formal">Formal</option>
+                    <option value="casual">Casual</option>
+                    <option value="friendly">Friendly</option>
+                    <option value="professional">Professional</option>
+                    <option value="enthusiastic">Enthusiastic</option>
+                </select>
+                <div class="dropdown-arrow">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <button id="generateBtn">Generate Email</button>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="loading-dots">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="generated-email" id="emailOutput">
+                <div class="content" id="emailContent">
+                    Your generated email will appear here...
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <div class="action-btn" id="copyBtn">
+                    <svg class="copy-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                    </svg>
+                    Copy
+                </div>
+                <button class="save-btn" id="saveBtn">Save to History</button>
+            </div>
+
+            <div class="footer">Powered by AI · Extension v2.1</div>
+        </div>
+
+        <!-- Liquid bubbles -->
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+
+        <!-- Toast notification -->
+        <div class="toast" id="toast"></div>
+
+        <button id="logout-btn" class="btn logout-btn">Logout</button>
+    </div>
     
     <div id="status" class="status logged-out">Not logged in</div>
 
+      
     <script src="popup.js"></script>
 </body>
 </html>

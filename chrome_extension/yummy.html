@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            width: 200px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .login-btn {
+            background: #007bff;
+            color: white;
+        }
+        .register-btn {
+            background: #28a745;
+            color: white;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .logged-in {
+            background: #d4edda;
+            color: #155724;
+        }
+        .logged-out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <h3 style="text-align: center; margin-bottom: 15px;">My App</h3>
+
+    <div id="auth-container" class="auth-container">
+        <h1>I HATE YOU</h1>
+        <button id="login-btn" class="btn login-btn">Login</button>
+        <button id="register-btn" class="btn register-btn">Register</button>
+    </div>
+
+    <div id="app-container" class="app-container">
+        <!--<h1>JK. I LOVE YOU</h1>-->
+
+        <div class="container">
+  <div class="header">
+    <div class="mode-toggle" id="modeToggle">
+      <div class="toggle-knob"></div>
+    </div>
+    <h1>AI Email Assistant</h1>
+    <div class="history-btn" id="historyBtn">History</div>
+  </div>
+
+  <div class="input-group">
+    <textarea id="emailInput" placeholder="Describe what you want to write about..."></textarea>
+    <select id="toneSelect">
+      <option value="formal">Formal</option>
+      <option value="casual">Casual</option>
+      <option value="friendly">Friendly</option>
+      <option value="professional">Professional</option>
+      <option value="enthusiastic">Enthusiastic</option>
+    </select>
+    <div class="dropdown-arrow">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </div>
+  </div>
+
+  <button id="generateBtn">Generate Email</button>
+
+  <div class="loading" id="loadingIndicator">
+    <div class="loading-dots">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="generated-email" id="emailOutput">
+    <div class="content" id="emailContent">
+      Your generated email will appear here...
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <div class="action-btn" id="copyBtn">
+      <svg class="copy-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+      </svg>
+      Copy
+    </div>
+    <button class="save-btn" id="saveBtn">Save to History</button>
+  </div>
+
+  <div class="footer">Powered by AI · Extension v2.1</div>
+</div>
+
+<!-- Liquid bubbles -->
+<div class="bubble bubble1"></div>
+<div class="bubble bubble2"></div>
+<div class="bubble bubble3"></div>
+<div class="bubble bubble4"></div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+        <button id="logout-btn" class="btn logout-btn">Logout</button>
+    </div>
+    
+    
+    <div id="status" class="status logged-out">Not logged in</div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

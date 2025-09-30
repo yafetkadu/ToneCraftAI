@@ -19,6 +19,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 
+# Services
+from services.ai_service import generate_email_message
+
+
 from dotenv import load_dotenv
 import os
 
@@ -188,7 +192,8 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         "id": existing_user.id,
         "email": existing_user.email,
         "firstname": existing_user.firstname,
-        "lastname": existing_user.lastname
+        "lastname": existing_user.lastname,
+        "tone_token": existing_user.craft_tokens
     }
 
 @app.get("/auth/success")
@@ -203,8 +208,31 @@ async def get_profile(user: user_dependency):
 
 # Placeholder Email Routes
 @app.post("/generate")
-def generate_professional_email():
-    pass
+def generate_professional_email(email: EmailRequest, user: user_dependency, db: Session = Depends(get_db)):
+    if user is None:
+        raise HTTPException(status_code=401, detail="Authentication Failed")
+    
+    # Extract the email from the token structure
+    user_email = user["username"]
+
+    # Query the user from the DB
+    current_user = db.query(UserModel).filter(UserModel.email == user_email).first()
+
+
+    if not current_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if current_user.craft_tokens < 1:
+        raise HTTPException(status_code=402, detail="Not enough craft tokens")
+    
+    # Generate the email using the function you wrote
+    generated_message = generate_email_message(email.draft, email.tone)
+
+    # Optionally: deduct 1 token
+    current_user.craft_tokens -= 1
+    db.commit()
+
+    return {"drafted_email": generated_message, 'current_tokens': current_user.craft_tokens}
 
 @app.get("/history")
 def get_email_history():

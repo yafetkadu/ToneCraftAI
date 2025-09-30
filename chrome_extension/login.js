@@ -33,7 +33,8 @@ document.getElementById('loginWithEmail').addEventListener('click', () => {
                 firstname: data.firstname,
                 lastname: data.lastname,
                 email: data.email,
-                id: data.id
+                id: data.id,
+                tone_token: data.tone_token
             }
         });
         
