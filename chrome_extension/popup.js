@@ -248,7 +248,15 @@ async function generate_ai_email(draft, tone) {
                 "Authorization": `Bearer ${authToken}`
             },
             body: JSON.stringify(prompt),
+            // check if its raise HTTPException(status_code=402, detail="Not enough craft tokens")
+            // then i get the details content
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            showToast(errorData.detail) // 👈 show popup with error
+            return;
+        }
 
         const data = await response.json();
         console.log("Response:", data.drafted_email);
